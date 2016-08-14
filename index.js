@@ -84,7 +84,12 @@ class Bot extends EventEmitter {
           }
         }
 
-        let parsed = JSON.parse(body)
+        let parsed = "";
+        try {
+          parsed = JSON.parse(body)
+        } catch (e) {
+            return false;
+        }
         this._handleMessage(parsed)
 
         res.end(JSON.stringify({status: 'ok'}))
